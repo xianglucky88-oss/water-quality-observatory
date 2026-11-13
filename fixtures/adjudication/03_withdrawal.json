@@ -1,0 +1,22 @@
+[
+  {
+    "action": "withdraw",
+    "source": "station-network",
+    "observed_at": "2026-11-02T08:00:00Z",
+    "payload": {
+      "station_id": "W-13",
+      "sample_id": "S-103",
+      "metric": "dissolved_oxygen"
+    }
+  },
+  {
+    "action": "withdraw",
+    "source": "station-network",
+    "observed_at": "2026-11-02T08:00:00Z",
+    "payload": {
+      "station_id": "W-13",
+      "sample_id": "S-103",
+      "metric": "dissolved_oxygen"
+    }
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "source": "lab-a",
+    "observed_at": "2026-11-02T09:00:00Z",
+    "payload": {
+      "station_id": "W-10",
+      "sample_id": "S-100",
+      "metric": "ph",
+      "value": 7.1,
+      "unit": "pH",
+      "quality_flag": "good"
+    }
+  },
+  {
+    "source": "lab-a",
+    "observed_at": "2026-11-02T09:05:00Z",
+    "payload": {
+      "station_id": "W-11",
+      "sample_id": "S-101",
+      "metric": "ammonia_n",
+      "value": 0.9,
+      "unit": "mg/L",
+      "quality_flag": "good"
+    }
+  },
+  {
+    "source": "station-network",
+    "observed_at": "2026-11-02T08:00:00Z",
+    "payload": {
+      "station_id": "W-11",
+      "sample_id": "S-101",
+      "metric": "ammonia_n",
+      "value": 1.2,
+      "unit": "mg/L",
+      "quality_flag": "good"
+    }
+  },
+  {
+    "source": "lab-b",
+    "observed_at": "2026-11-02T09:10:00Z",
+    "payload": {
+      "station_id": "W-12",
+      "sample_id": "S-102",
+      "metric": "lead",
+      "value": 0.07,
+      "unit": "mg/L",
+      "quality_flag": "good"
+    }
+  }
+]

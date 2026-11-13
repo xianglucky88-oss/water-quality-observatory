@@ -1,0 +1,10 @@
+{
+  "source_priority": {
+    "lab-a": 100,
+    "lab-b": 100,
+    "lab-c": 90,
+    "station-network": 10
+  },
+  "fallback_priority": 0,
+  "eligible_quality_flags": ["good", "suspect"]
+}

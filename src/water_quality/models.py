@@ -17,6 +17,21 @@ class WaterQualityRecord:
     quality_flag: str
     payload: dict[str, Any]
     raw_hash: str
+    content_hash: str
+
+
+@dataclass(frozen=True)
+class WithdrawalDirective:
+    """A source asking to withdraw one of its previously submitted reports."""
+
+    source: str
+    target_record_key: str
+    observed_at: str
+    station_id: str
+    sample_id: str
+    metric: str
+    directive_hash: str
+    payload: dict[str, Any]
 
 
 DOMAIN_RECORD_TYPE: TypeAlias = WaterQualityRecord

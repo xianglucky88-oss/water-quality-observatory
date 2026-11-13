@@ -1,0 +1,26 @@
+[
+  {
+    "source": "lab-a",
+    "observed_at": "2026-11-02T12:00:00Z",
+    "payload": {
+      "station_id": "W-15",
+      "sample_id": "S-105",
+      "metric": "total_phosphorus",
+      "value": 0.22,
+      "unit": "mg/L",
+      "quality_flag": "good"
+    }
+  },
+  {
+    "source": "station-network",
+    "observed_at": "2026-11-02T12:05:00Z",
+    "payload": {
+      "station_id": "W-16",
+      "sample_id": "S-106",
+      "metric": "ph",
+      "value": "not-a-number",
+      "unit": "pH",
+      "quality_flag": "good"
+    }
+  }
+]

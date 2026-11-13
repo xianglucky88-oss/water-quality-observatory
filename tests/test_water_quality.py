@@ -33,9 +33,9 @@ def test_fixture_pipeline_is_idempotent(tmp_path):
     assert first["accepted"] == 3
     assert first["rejected"] == 1
     assert second["changed"] == 0
-    assert second["records"] == 3
-    assert second["batches"] == 2
-    assert second["raw_manifests"] == 1
+    assert second["total_records"] == 3
+    assert second["total_batches"] == 2
+    assert second["total_raw_manifests"] == 1
 
 
 def test_http_source_runs_end_to_end_and_lands_raw(tmp_path):
