@@ -1,0 +1,7 @@
+[project]
+name = "water-quality-observatory"
+version = "0.1.0"
+requires-python = ">=3.11"
+
+[project.scripts]
+water-quality-observatory = "water_quality.cli:main"

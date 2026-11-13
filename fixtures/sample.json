@@ -1,0 +1,50 @@
+[
+  {
+    "source": "station-network",
+    "observed_at": "2026-11-01T10:00:00Z",
+    "payload": {
+      "station_id": "W-01",
+      "sample_id": "S-001",
+      "metric": "ph",
+      "value": 7.2,
+      "unit": "pH",
+      "quality_flag": "good"
+    }
+  },
+  {
+    "source": "lab-a",
+    "observed_at": "2026-11-01T10:05:00Z",
+    "payload": {
+      "station_id": "W-01",
+      "sample_id": "S-002",
+      "metric": "dissolved_oxygen",
+      "value": 8.5,
+      "unit": "mg/L",
+      "quality_flag": "good"
+    }
+  },
+  {
+    "source": "lab-a",
+    "observed_at": "2026-11-01T10:10:00Z",
+    "payload": {
+      "station_id": "W-02",
+      "sample_id": "S-003",
+      "metric": "lead",
+      "value": 0.04,
+      "unit": "mg/L",
+      "quality_flag": "suspect"
+    }
+  },
+  {
+    "source": "station-network",
+    "observed_at": "2026-11-01T10:15:00Z",
+    "payload": {
+      "station_id": "W-03",
+      "sample_id": "S-004",
+      "metric": "ph",
+      "value": 19,
+      "unit": "pH",
+      "quality_flag": "good"
+    }
+  }
+]
