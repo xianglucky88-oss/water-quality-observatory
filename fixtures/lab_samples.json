@@ -1,0 +1,153 @@
+[
+  {
+    "source": "lab-a",
+    "observed_at": "2026-11-02T09:00:00Z",
+    "payload": {
+      "station_id": " W-01 ",
+      "sample_id": "S-101",
+      "metric": " Lead ",
+      "value": "  < 0.01 ",
+      "unit": " mg/L ",
+      "quality_flag": "good",
+      "detection_limit": 0.01
+    }
+  },
+  {
+    "source": "lab-a",
+    "observed_at": "2026-11-02T09:05:00Z",
+    "payload": {
+      "station_id": "W-01",
+      "sample_id": "S-101",
+      "metric": "lead",
+      "value": 10,
+      "unit": "ug/L",
+      "quality_flag": "good",
+      "detection_limit": 5
+    }
+  },
+  {
+    "source": "lab-b",
+    "observed_at": "2026-11-02T09:10:00Z",
+    "payload": {
+      "station_id": "W-02",
+      "sample_id": "S-102",
+      "metric": "ammonia_n",
+      "value": "ND",
+      "unit": "mg/L",
+      "quality_flag": "good",
+      "detection_limit": 0.02
+    }
+  },
+  {
+    "source": "lab-b",
+    "observed_at": "2026-11-02T09:15:00Z",
+    "payload": {
+      "station_id": "W-02",
+      "sample_id": "S-103",
+      "metric": "ammonia_n",
+      "value": "ND",
+      "unit": "mg/L",
+      "quality_flag": "good"
+    }
+  },
+  {
+    "source": "lab-b",
+    "observed_at": "2026-11-02T09:20:00Z",
+    "payload": {
+      "station_id": "W-03",
+      "sample_id": "S-104",
+      "metric": "total_phosphorus",
+      "value": 0.3,
+      "unit": "ppb",
+      "quality_flag": "good"
+    }
+  },
+  {
+    "source": "lab-b",
+    "observed_at": "2026-11-02T09:25:00Z",
+    "payload": {
+      "station_id": "W-03",
+      "sample_id": "S-105",
+      "metric": "lead",
+      "value": "<0.005",
+      "unit": "mg/L",
+      "quality_flag": "good",
+      "detection_limit": 9999
+    }
+  },
+  {
+    "source": "lab-a",
+    "observed_at": "2026-11-02T09:30:00Z",
+    "payload": {
+      "station_id": "W-04",
+      "sample_id": "S-106",
+      "metric": "lead",
+      "value": 0.02,
+      "unit": "mg/L",
+      "qualifier": "<",
+      "quality_flag": "good",
+      "detection_limit": 0.01
+    }
+  },
+  {
+    "source": "lab-a",
+    "observed_at": "2026-11-02T09:35:00Z",
+    "payload": {
+      "station_id": "W-04",
+      "sample_id": "S-107",
+      "metric": "lead",
+      "value": "µg/L",
+      "unit": "mg/L",
+      "quality_flag": "good"
+    }
+  },
+  {
+    "source": "lab-a",
+    "observed_at": "2026-11-02T09:40:00Z",
+    "payload": {
+      "station_id": "W-05",
+      "sample_id": "S-108",
+      "metric": "lead",
+      "value": 0.008,
+      "unit": "mg/L",
+      "quality_flag": "good",
+      "detection_limit": 0.01
+    }
+  },
+  {
+    "source": "lab-a",
+    "observed_at": "2026-11-02T09:45:00Z",
+    "payload": {
+      "station_id": "W-05",
+      "sample_id": "S-109",
+      "metric": "lead",
+      "value": 0.012,
+      "unit": "mg/L",
+      "quality_flag": "good"
+    }
+  },
+  {
+    "source": "lab-a",
+    "observed_at": "2026-11-02T09:50:00Z",
+    "payload": {
+      "station_id": "W-06",
+      "sample_id": "S-110",
+      "metric": "total_phosphorus",
+      "value": 200,
+      "unit": "ug/L",
+      "quality_flag": "suspect"
+    }
+  },
+  {
+    "source": "lab-a",
+    "observed_at": "2026-11-02T09:55:00Z",
+    "payload": {
+      "station_id": "W-06",
+      "sample_id": "S-111",
+      "metric": "ph",
+      "value": "7.8",
+      "unit": "pH",
+      "quality_flag": "good"
+    }
+  }
+]
