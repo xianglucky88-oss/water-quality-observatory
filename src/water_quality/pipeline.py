@@ -29,6 +29,7 @@ class IngestionPipeline:
                     raise ValueError("; ".join(issues))
                 accepted += 1
                 changed += int(self.store.upsert(record))
+                self.store.save_record_version(record, self.batch_id)
             except (TypeError, ValueError, KeyError) as exc:
                 rejected += 1
                 source = raw.get("source") if isinstance(raw, dict) else None

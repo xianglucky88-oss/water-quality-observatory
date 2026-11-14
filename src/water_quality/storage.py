@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import sqlite3
+from collections.abc import Callable
 from datetime import datetime, timezone
 from typing import Any
 
@@ -11,7 +12,10 @@ from .models import DOMAIN_RECORD_TYPE
 class DataStore:
     """Owns structured tables, idempotent writes, rejection records and batch state."""
 
-    def __init__(self, database: str) -> None:
+    def __init__(self, database: str, clock: Callable[[], datetime] | None = None) -> None:
+        # Injectable clock keeps arrival timestamps deterministic in tests;
+        # the default preserves the previous UTC wall-clock behaviour.
+        self._clock = clock
         self.conn = sqlite3.connect(database)
         self.conn.execute("PRAGMA foreign_keys = ON")
         self.conn.executescript("""
@@ -52,12 +56,45 @@ class DataStore:
             created_at TEXT NOT NULL,
             FOREIGN KEY(batch_id) REFERENCES batches(batch_id)
         );
+        -- Append-only provenance. Every accepted version is retained, including
+        -- duplicate sources whose content differs. Nothing here is ever updated
+        -- or deleted, so window assessments remain reproducible across imports.
+        CREATE TABLE IF NOT EXISTS record_versions (
+            version_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            record_key TEXT NOT NULL,
+            batch_id INTEGER NOT NULL,
+            source TEXT NOT NULL,
+            observed_at TEXT NOT NULL,
+            station_id TEXT NOT NULL,
+            sample_id TEXT NOT NULL,
+            metric TEXT NOT NULL,
+            value REAL NOT NULL,
+            unit TEXT NOT NULL,
+            quality_flag TEXT NOT NULL,
+            payload_json TEXT NOT NULL,
+            raw_hash TEXT NOT NULL,
+            first_seen_at TEXT NOT NULL,
+            UNIQUE(batch_id, record_key, raw_hash),
+            FOREIGN KEY(batch_id) REFERENCES batches(batch_id)
+        );
+        -- Links each processing batch to the immutable raw material it came from.
+        CREATE TABLE IF NOT EXISTS batch_raw_materials (
+            batch_id INTEGER NOT NULL,
+            digest TEXT NOT NULL,
+            source TEXT NOT NULL,
+            content_type TEXT NOT NULL,
+            byte_count INTEGER NOT NULL,
+            path TEXT,
+            captured_at TEXT NOT NULL,
+            PRIMARY KEY(batch_id, digest),
+            FOREIGN KEY(batch_id) REFERENCES batches(batch_id)
+        );
         """)
         self.conn.commit()
 
-    @staticmethod
-    def _now() -> str:
-        return datetime.now(timezone.utc).isoformat()
+    def _now(self) -> str:
+        moment = self._clock() if self._clock is not None else datetime.now(timezone.utc)
+        return moment.astimezone(timezone.utc).isoformat()
 
     def start_batch(self, source: str) -> int:
         cursor = self.conn.execute(
@@ -91,6 +128,31 @@ class DataStore:
         self.conn.execute(
             "INSERT INTO rejected_records(batch_id, source, error, raw_json, created_at) VALUES (?, ?, ?, ?, ?)",
             (batch_id, source, error, json.dumps(raw, ensure_ascii=False, sort_keys=True), self._now()),
+        )
+        self.conn.commit()
+
+    def save_record_version(self, record: DOMAIN_RECORD_TYPE, batch_id: int) -> None:
+        """Append an accepted version. Re-ingestion of the same raw content is a no-op."""
+        self.conn.execute(
+            """INSERT OR IGNORE INTO record_versions(record_key, batch_id, source, observed_at,
+                 station_id, sample_id, metric, value, unit, quality_flag, payload_json, raw_hash, first_seen_at)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            (
+                record.record_key, batch_id, record.source, record.observed_at,
+                record.station_id, record.sample_id, record.metric, record.value,
+                record.unit, record.quality_flag,
+                json.dumps(record.payload, ensure_ascii=False, sort_keys=True),
+                record.raw_hash, self._now(),
+            ),
+        )
+        self.conn.commit()
+
+    def link_batch_raw_material(self, batch_id: int, digest: str, source: str, content_type: str,
+                                byte_count: int, path: str | None) -> None:
+        self.conn.execute(
+            """INSERT OR IGNORE INTO batch_raw_materials(batch_id, digest, source, content_type,
+                 byte_count, path, captured_at) VALUES (?, ?, ?, ?, ?, ?, ?)""",
+            (batch_id, digest, source, content_type, byte_count, path, self._now()),
         )
         self.conn.commit()
 

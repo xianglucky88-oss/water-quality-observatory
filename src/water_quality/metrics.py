@@ -1,9 +1,9 @@
 METRIC_UNITS = {
     "ph": {"ph"},
-    "dissolved_oxygen": {"mg/l", "mg/l"},
-    "ammonia_n": {"mg/l", "mg/l"},
-    "total_phosphorus": {"mg/l", "mg/l"},
-    "lead": {"mg/l", "mg/l"},
+    "dissolved_oxygen": {"mg/l"},
+    "ammonia_n": {"mg/l"},
+    "total_phosphorus": {"mg/l"},
+    "lead": {"mg/l"},
 }
 
 
